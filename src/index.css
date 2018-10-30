@@ -1,5 +1,4 @@
 /* ELEMENT STYLES -------------------- */
-
 body {
   background: #e8e7e7; 
   font-family: arial;
@@ -21,12 +20,9 @@ header h1 {
   font-size: 1.5em;
   letter-spacing: 2px;
   font-weight: normal;
-  text-align: right;
-  padding-right: 5px;
 }
 
 /* FORMS */
-
 form {
   display: flex;
   background-color: #8063FA;
@@ -80,7 +76,6 @@ input[type=submit] {
 }
 
 /* ICONS */
-
 svg {
   width: 28px;
   height: 19px;
@@ -99,7 +94,6 @@ svg {
 }
 
 /* COMPONENT STYLES -------------------- */
-
 .scoreboard {
   background: #fff;
   width: 700px;
