@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
+import React, {
+    Component
+} from 'react';
 import Proptypes from 'prop-types';
 import Header from './Header';
 import Player from './Player';
 import AddPlayerForm from './AddPlayerForm';
 
-class App extends Component{
+class App extends Component {
 
-	static Proptypes = {
-		handleAddPlayer: Proptypes.func.isRequired,
-		handleRemovePlayer: Proptypes.func.isRequired,
-		handleScoreChange: Proptypes.func.isRequired,
-	}
+    static Proptypes = {
+        handleAddPlayer: Proptypes.func.isRequired,
+        handleRemovePlayer: Proptypes.func.isRequired,
+        handleScoreChange: Proptypes.func.isRequired,
+    }
 
     state = {
-        players: [
-            {
+        players: [{
                 name: "Ovi",
                 score: 0,
                 id: 5,
@@ -45,32 +46,18 @@ class App extends Component{
         this.setState(prevState => ({
             score: prevState.players[index].score += delta
         }));
-        // let max = 0;
-
-        // this.setState((prevState) => {
-        //     prevState.players.forEach(player => {
-        //         if (player.score > max) {
-        //             max = player.score;
-        //             if (prevState.players[index].score >= max) {
-        //                 const a = document.querySelectorAll('svg')[index];
-        //                 a.setAttribute('class', 'is-high-score');
-        //             } else {
-        //                 // console.log('sal')
-        //                 const a = document.querySelectorAll('svg')[index];
-        //                 a.removeAttribute('class');
-        //             }
-        //         }
-        //         if (player.score < max) {
-
-        //             console.log(player.score +'-'+player.name)
-
-        //         }
-
-
-        //     });
-        //     // console.log(max);
-        // });
+        this.highestScore();
     }
+
+    highestScore = () => {
+        const scores = this.state.players.map(player => player.score);
+        const max = Math.max(...scores);
+        if (max) {
+            return max;
+        }
+        return null;
+    }
+
 
     // player id counter
     prevPlayerId = 5;
@@ -92,11 +79,12 @@ class App extends Component{
     }
 
     handleRemovePlayer = (id) => {
-        this.setState( prevState => ({
+        this.setState(prevState => ({
             players: prevState.players.filter(p => p.id !== id)
         }));
     }
     render(){
+        const highScore = this.highestScore();
 		return (
 			<div className="scoreboard">
 					<Header players={this.state.players} />
@@ -111,6 +99,7 @@ class App extends Component{
 						key={player.id.toString()}
 						id={player.id}
 						removePlayer={this.handleRemovePlayer}
+                        isHighScore={highScore === player.score}
 						/>
 					)}
 
